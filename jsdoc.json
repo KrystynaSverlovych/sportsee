@@ -1,0 +1,24 @@
+{
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "source": {
+    "include": ["src"],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "plugins": ["plugins/markdown"],
+  "templates": {
+    "better-docs": {
+      "name": "My React components",
+      "cleverLinks": true,
+      "monospaceLinks": true
+    }
+  },
+  "opts": {
+    "destination": "./doc-api",
+    "recurse": true,
+    "readme": "./README.md"
+  }
+}

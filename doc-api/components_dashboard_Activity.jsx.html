@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/dashboard/Activity.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/dashboard/Activity.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import PropTypes from "prop-types";
+import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from "recharts";
+import UserActivity from "../../models/UserActivity";
+import "../../styles/activity.scss";
+
+/**
+ * @file Activity, a REACT functional component mount with Recharts library
+ * @see {@link https://recharts.org/} for further information.
+ */
+
+/**
+ * @function CustomTooltip
+ * @description Component to custom the tooltip of the chart
+ * @param { Boolean } active - true if bars hovered over, false if not
+ * @param { Object } payload - the data data of overflown bars
+ * @returns { HTMLElement }
+ */
+const CustomTooltip = ({ active, payload }) => {
+    if (active &amp;&amp; payload &amp;&amp; payload.length) {
+        return (
+            &lt;div className="tooltip">
+                &lt;p className="tooltip__calories">{payload[0].value + "kg"}&lt;/p>
+                &lt;p className="tootip__kilogram">{payload[1].value + "kcal"}&lt;/p>
+            &lt;/div>
+        );
+    }
+    return null;
+};
+
+/**
+ * @function Activity
+ * @description Component that shows a bar chart of the weight and calories burned for the day by the user
+ * @param { Object } userActivity
+ * @param { Array.&lt;Objects> } userActivity.sessions - the sessions of the user
+ * @param { Number } userActivity.userId - the Id of the user
+ * @returns { HTMLElement }
+ */
+const Activity = ({ userActivityData }) => {
+
+    /**
+     * Link to User class.
+     * See {@link UserActivity}
+     */
+    const ACTIVITY_CLASS = new UserActivity(userActivityData);
+
+    return (
+        &lt;section className="activity">
+            &lt;h6 className="activity__title">Activité quotidienne&lt;/h6>
+            &lt;ResponsiveContainer>
+                &lt;BarChart
+                    width={500}
+                    height={300}
+                    data={ACTIVITY_CLASS.initActivity}
+                    barSize={7}
+                    barGap={8}
+                    margin={{bottom: 60,}}
+                >
+                    &lt;CartesianGrid strokeDasharray="3 3" vertical={false} />
+                    &lt;XAxis dataKey="name" tickLine={false} tickMargin={15} />
+                    &lt;YAxis
+                        yAxisId="right"
+                        dataKey="kilogram"
+                        orientation="right"
+                        axisLine={false}
+                        tickLine={false}
+                        domain={["dataMin - 2", "dataMax + 2"]}
+                        tickMargin={35}
+                    />
+                    &lt;YAxis
+                        yAxisId="left"
+                        dataKey="calories"
+                        orientation="left"
+                        hide={true}
+                    />
+
+                    &lt;Tooltip content={&lt;CustomTooltip />} offset={50} />
+                    &lt;Legend
+                        payload={[
+                            {
+                                value: "Poids (kg)",
+                                type: "circle",
+                                id: "ID01",
+                            },
+                            {
+                                value: "Calories brûlées (kCal)",
+                                type: "circle",
+                                id: "ID02",
+                                color: "#E60000",
+                            },
+                        ]}
+                        align="right"
+                        verticalAlign="top"
+                        iconSize={8}
+                        wrapperStyle={{ top: "-50px", right: "-10px" }}
+                    />
+                    &lt;Bar
+                        yAxisId="right"
+                        dataKey="kilogram"
+                        fill="#282D30"
+                        radius={[10, 10, 0, 0]}
+                    />
+                    &lt;Bar
+                        yAxisId="left"
+                        dataKey="calories"
+                        fill="#E60000"
+                        radius={[10, 10, 0, 0]}
+                    />
+                &lt;/BarChart>
+            &lt;/ResponsiveContainer>
+        &lt;/section>
+    );
+};
+
+Activity.propTypes = {
+    userActivityData: PropTypes.object.isRequired,
+};
+
+export default Activity;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="User.html">User</a></li><li><a href="UserActivity.html">UserActivity</a></li><li><a href="UserAverageSession.html">UserAverageSession</a></li><li><a href="UserPerformance.html">UserPerformance</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Activity">Activity</a></li><li><a href="global.html#AverageSession">AverageSession</a></li><li><a href="global.html#CustomTooltip">CustomTooltip</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Kpi">Kpi</a></li><li><a href="global.html#Performance">Performance</a></li><li><a href="global.html#Score">Score</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#getActivity">getActivity</a></li><li><a href="global.html#getAverageSessions">getAverageSessions</a></li><li><a href="global.html#getPerformance">getPerformance</a></li><li><a href="global.html#getURL">getURL</a></li><li><a href="global.html#getUser">getUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Wed Feb 01 2023 15:38:59 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+.score {
+  width: 31%;
+  height: 43%;
+  position: relative;
+  background: #fbfbfb;
+  border-radius: 5px;
+
+  .score__legend {
+    font-size: 15px;
+    color: #020203;
+  }
+
+  p {
+    width: 96px;
+  }
+
+  .score__label {
+    position: absolute;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #020203;
+  }
+  .score__number {
+    font-weight: 700;
+    font-size: clamp(16px, 1.806vw, 26px);
+  }
+
+  .score__text {
+    font-size: clamp(14px, 1.111vw, 16px);
+    color: #74798c;
+    line-height: 26px;
+  }
+}

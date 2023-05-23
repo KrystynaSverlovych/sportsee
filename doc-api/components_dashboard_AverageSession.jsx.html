@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/dashboard/AverageSession.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/dashboard/AverageSession.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import PropTypes from "prop-types";
+import {AreaChart, Area, XAxis, YAxis, Tooltip} from "recharts";
+import UserAverageSession from "../../models/UserAverageSession";
+import "../../styles/averageSession.scss";
+
+/**
+ * @function AverageSession
+ * @description Recharts line graph that show average duration in minutes of user's sport sessions
+ * @param { Object } averageSessionsData All the data needed for the Line chart
+ * @param { Array.&lt;Objects> } averageSessionsData.sessions - the sessions of the user
+ * @param { Number } averageSessionsData.userId - the Id of the user
+ * @returns { HTMLElement }
+ */
+const AverageSession = ({averageSessionsData}) => {
+
+    const AVERAGE_SESSIONS_CLASS = new UserAverageSession(averageSessionsData);
+
+    return (
+        &lt;section className="average-session">
+            &lt;h6 className="average-session--label">Durée moyenne des sessions&lt;/h6>
+            &lt;AreaChart
+                width={233}
+                height={233}
+                data={AVERAGE_SESSIONS_CLASS._averageSessions}
+                margin={{
+                    top: 1,
+                    right: 7,
+                    bottom: 9,
+                    left: 7,
+                }}>
+                &lt;XAxis
+                    dataKey="name"
+                    tickLine={false}
+                    tickSize={20}
+                    axisLine={false}
+                    tick={{fill: "rgba(255, 255, 255, .5)"}}
+                />
+                &lt;YAxis hide={true} domain={[0, "dataMax + 51"]}/>
+
+                &lt;Tooltip
+                    filterNull={false}
+                    separator=""
+                    itemStyle={{
+                        color: "#000000",
+                        backgroundColor: "#ffffff",
+                        fontSize: "10px",
+                        padding: "rem",
+                        margin: 3,
+                        border: 0,
+                    }}
+                    formatter={(name, value) => [name, ""]}
+                    contentStyle={{
+                        padding: ".4rem",
+                        backgroundColor: "#ffffff",
+                        border: 0,
+                    }}
+                    labelStyle={{
+                        display: "none",
+                    }}
+                />
+
+                &lt;Area
+                    type="natural"
+                    dataKey="sessionLength"
+                    stroke="#ffffff"
+                    activeDot={{
+                        stroke: "rgba(255, 255, 255, .5)",
+                        strokeWidth: 10,
+                        r: 2.5,
+                    }}
+                    dot={false}
+                    unit="min"
+                    strokeWidth={2}
+                    connectNulls={true}
+                    fillOpacity={1}
+                    fill="rgba(255, 255, 255, .1)"
+                />
+            &lt;/AreaChart>
+        &lt;/section>
+    );
+};
+
+AverageSession.propTypes = {
+    averageSessionsData: PropTypes.object.isRequired,
+};
+
+export default AverageSession;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="User.html">User</a></li><li><a href="UserActivity.html">UserActivity</a></li><li><a href="UserAverageSession.html">UserAverageSession</a></li><li><a href="UserPerformance.html">UserPerformance</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Activity">Activity</a></li><li><a href="global.html#AverageSession">AverageSession</a></li><li><a href="global.html#CustomTooltip">CustomTooltip</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Kpi">Kpi</a></li><li><a href="global.html#Performance">Performance</a></li><li><a href="global.html#Score">Score</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#getActivity">getActivity</a></li><li><a href="global.html#getAverageSessions">getAverageSessions</a></li><li><a href="global.html#getPerformance">getPerformance</a></li><li><a href="global.html#getURL">getURL</a></li><li><a href="global.html#getUser">getUser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Wed Feb 01 2023 15:38:59 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
